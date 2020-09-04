@@ -1,0 +1,29 @@
+body{
+   background-image: url("./background.JPG");
+}
+
+
+h1{
+   text-align: center;
+   color: white;
+   font-weight: bold;
+   font-size: 50px;
+   font-family: 'Song Myung', serif;
+
+
+
+}
+.login, .login_submission, .signup{
+    text-align: center;
+    font-family: 'NEXON Lv1 Gothic OTF Light';
+    color: white;
+}
+
+
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+                   
