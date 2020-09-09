@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import JsonResponse
 import json, requests
 
-
 def index(request):
     return render(request, 'index.html')
 
@@ -17,7 +16,7 @@ def searchBook(request, query):
 
     queryStr = "query=" + query  # 검색어
 
-    response = {"테스트":"test"}#requests.get(url + queryStr, headers=header).json()
+    response = requests.get(url + queryStr, headers=header).json()
     print(response)
 
     return JsonResponse(response, content_type="utf-8")
