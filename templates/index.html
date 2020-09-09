@@ -22,14 +22,14 @@
         {% if user.is_authenticated %}
             <section class="login">
                 <label for="bookname"> 책 이름을 검색하세요 : </label>
-                <input id="bookname" name=bookname type="text">
+                <input id="bookname" name="bookname" type="text">
             </section>
         {% else %}
         <form method="POST" action="{% url 'accounts:login' %}">
             {% csrf_token %}
             <section class="login">
                 <label for="username"> 아이디 : </label>
-                <input id="username" name=username type="text">
+                <input id="username" name="username" type="text">
                 <br>
                 <label for="password"> 비밀번호: </label>
                 <input id="password" name="password" type="password">
