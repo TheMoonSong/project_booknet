@@ -4,7 +4,7 @@
 <html>
     <head>
         <title>Happy Reading for Everyone</title>
-        <link href="{% static 'domain/style.css' %}" type="text/css" rel="stylesheet">
+        <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet">
         
         <link href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap" rel="stylesheet">
    </head>
@@ -13,11 +13,11 @@
         <header>
             <h1>책 통 행</h1>
         </header>
-<!--
+
         <div id="backgroundImg">
-            <img src="./background.JPG" alt="MoonSong Background Image"/>
+            <img src="{% static 'img/background.JPG' %}" alt="MoonSong Background Image"/>
         </div>
-    -->
+
         <!--form action="submission.html" method="GET"-->
         {% if user.is_authenticated %}
             <section class="login">
