@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Path to books, Path to happy
+{% endblock %}
+
+{% block content %}
+
+    <div class="demo-grid-ruler mdl-grid">
+        <div class="mdl-cell mdl-cell--2-col"></div>
+        <div class="mdl-cell mdl-cell--4-col">
+
+            {% for object in object_list %}
+
+            <style>
+                .demo-card-square.mdl-card {
+                    width: 320px;
+                    height: 320px;
+                }
+                .demo-card-square > .mdl-card__title {
+                    color: #fff;
+                    background:"{{ object.image.url }}" bottom right 15% no-repeat #46B6AC;
+                }
+            </style>
+
+                <div class="demo-card-square mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__supporting-text">
+                        {{object.author}}
+                    </div>
+
+                    <div class="mdl-card__supporting-text">
+                        <img src="{{ object.image.url }}">
+                        {{object.text}}
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        {{object.text}}
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                            댓글달기
+                        </a>
+                    </div>
+                </div>
+                <br>
+
+
+            {% endfor %}
+
+        </div>
+
+        <div class="mdl-cell mdl-cell--4-col">
+
+        </div>
+    </div>
+{% endblock %}
