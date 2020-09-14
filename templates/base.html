@@ -5,6 +5,7 @@
     <head>
         <title>{% block title %}{% endblock %}</title>
         <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet">
+        <link href="{% static 'css/style1.css' %}" type="'text/css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -37,7 +38,9 @@
                 <nav class="mdl-navigation">
                 <a class="mdl-navigation__link" href="">Learn More</a>
                 {% if user.is_authenticated %}
-                <a class="mdl-navigation__link" href="">내 계정</a>
+                    <form method="GET" action="{% url 'accounts:logout' %}">
+                        <a class="mdl-navigation__link" href="http://127.0.0.1:8000/">로그아웃</a>
+                    </form>
                 {% else %}
                 <a class="mdl-navigation__link" href="">회원가입</a>
                 {% endif %}
@@ -49,13 +52,14 @@
             <span class="mdl-layout-title">책통행</span>
             <nav class="mdl-navigation">
                 <a class="mdl-navigation__link" href="">홈</a>
-                <a class="mdl-navigation__link" href="">피드보기</a>
+                <a class="mdl-navigation__link" href="">내 계정</a>
             </nav>
         </div>
 
         <main class="mdl-layout__content">
 
         {% block content %}{% endblock %}
+        {% block details %}{% endblock %}
 
         </main>
 
