@@ -38,9 +38,8 @@
                 <nav class="mdl-navigation">
                 <a class="mdl-navigation__link" href="">Learn More</a>
                 {% if user.is_authenticated %}
-                    <form method="GET" action="{% url 'accounts:logout' %}">
-                        <a class="mdl-navigation__link" href="http://127.0.0.1:8000/">로그아웃</a>
-                    </form>
+                    <a class="mdl-navigation__link" href="{% url 'accounts:logout' %}">로그아웃</a>
+
                 {% else %}
                 <a class="mdl-navigation__link" href="">회원가입</a>
                 {% endif %}

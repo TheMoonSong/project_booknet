@@ -1,5 +1,5 @@
 // Information to reach API
-const url ="http://127.0.0.1:8000/";
+const url =document.location.href;
 const queryParams ='search/';
 
 // Select elements
@@ -35,7 +35,6 @@ const getBookInfo = () => {
     let bookInfo = xhr.response;
 
     populateHeader(bookInfo['items']);
-    showBookList(bookInfo['items']);
 
   }
 }
@@ -47,27 +46,19 @@ function removeTag(String){
 
 function populateHeader(jsonObj){
 
-
-
   for(let i=0;i<jsonObj.length;i++){
-
-       let bookHeader = document.createElement('h2');
-       let bookAuthor = document.createElement('p');
-       let bookPrice = document.createElement('p');
-       let bookDetail = document.createElement('p');
-       console.log(jsonObj[i]);
 
        let card = header.cloneNode(true);
 
        let bookName = jsonObj[i]['title'];
        let bookWriter = jsonObj[i]['author'];
-       let bookValue = jsonObj[i]['price'];
-       let bookSmall = jsonObj[i]['description'];
+       let bookPrice = jsonObj[i]['price'];
+       let bookDetails = jsonObj[i]['description'];
        let bookImg = jsonObj[i]['image'];
        console.log(bookImg);
 
        document.getElementById('bookName').innerHTML = removeTag(bookName);
-       document.getElementById('bookDetails').innerHTML = removeTag(bookSmall);
+       document.getElementById('bookDetails').innerHTML = removeTag(bookDetails);
        document.getElementsByClassName('mdl-card__title')[0].style.backgroundImage ="url("+bookImg+")";
 
        header.appendChild(card);
@@ -83,9 +74,7 @@ function populateHeader(jsonObj){
 
 
 }
-function showBookList(jsonObj){
-  let book
-}
+
 
 
 

@@ -1,5 +1,5 @@
 // Information to reach API
-const url ="http://127.0.0.1:8000/";
+const url =document.location.href;
 const queryParams ='search/';
 
 // Select elements
