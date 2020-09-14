@@ -14,8 +14,9 @@ h1{
 .signup, 
 .logout_submission,
 .signup_submission,
-.search,
-.mdl-textfield mdl-js-textfield mdl-textfield--expandable{
+.bookSearching,
+.mdl-button mdl-js-button mdl-button--icon
+{
     text-align: center;
     font-family: 'NEXON Lv1 Gothic OTF Light';
     color: white;
