@@ -9,7 +9,12 @@ h1{
 
 
 }
-.login, .login_submission, .signup, .logout_submission{
+.login,
+.login_submission, 
+.signup, 
+.logout_submission,
+.signup_submission,
+.search{
     text-align: center;
     font-family: 'NEXON Lv1 Gothic OTF Light';
     color: white;
