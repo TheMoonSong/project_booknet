@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "base.html" %}
 
 {% block title %}
@@ -98,4 +99,122 @@
     <script type="text/javascript" src="static/js/request.js"></script>
 
 
+=======
+{% extends "base.html" %}
+
+{% block title %}
+    Path to books, Path to happy
+{% endblock %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+        <section class="bookSearching">
+          <h2> 책을 검색하세요 </h2>
+            <div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                    <label class="mdl-button mdl-js-button mdl-button--icon" for="bookSearch">
+                    <i class="material-icons">search</i>
+                    </label>
+                    <div class=mdl-textfield__expandable-holder>
+                    <input class="mdl-textfield__input" type="text" id="bookSearch" onkeydown="mykeydown()">
+                    <label class="mdl-textfield__label" for="sample-expandable"> Expandable Input</label>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--
+        <form method="GET" action="{% url 'accounts:logout' %}">
+            <section class="logout_submission">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                    로그아웃
+                  </button>
+            </section>
+        </form>
+        -->
+
+
+
+        <div id="bookList">
+        <style>
+            .demo-card-wide.mdl-card {
+              width: 512px;
+            }
+
+            .demo-card-wide > .mdl-card__title {
+              color: #fff;
+              height: 176px;
+              background-image: url(https://img.huffingtonpost.com/asset/5d70682724000032007549cf.jpeg?ops=scalefit_630_noupscale);
+              background-repeat: no-repeat;
+              background-size: 200px 500px;
+              background-color: black;
+            }
+
+
+            .demo-card-wide > .mdl-card__menu {
+              color: #fff;
+            }
+            </style>
+
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+          <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text" id="bookName">Welcome</h2>
+          </div>
+          <div class="mdl-card__supporting-text" id="bookDetails">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Mauris sagittis pellentesque lacus eleifend lacinia...
+          </div>
+          <div class="mdl-card__actions mdl-card--border">
+            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+              피드보기
+            </a>
+          </div>
+          <div class="mdl-card__menu">
+            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+              <i class="material-icons">share</i>
+            </button>
+          </div>
+        </div>
+
+        </div>
+
+
+    {% else %}
+    <form method="POST" action="{% url 'accounts:login' %}">
+        {% csrf_token %}
+        <section class="login">
+            <label for="username"> 아이디 : </label>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" name="username" type="text" id="username">
+                <label class="mdl-textfield__label" for="username">아이디...</label>
+              </div>
+            <br>
+            <label for="password"> 비밀번호: </label>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" name="password" type="password" id="password">
+                <label class="mdl-textfield__label" for="password">비밀번호...</label>
+                <span class="mdl-textfield__error">Input is not a number!</span>
+              </div>
+       </section>
+       <br>
+       <section class="login_submission">
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit">
+            로그인
+          </button>
+       </section>
+    </form>
+
+
+    <br>
+    <section class="signup">
+        <a href="{% url 'accounts:signup' %}" >아직 회원이 아니신가요?</a>
+    </section>
+    {% endif %}
+
+    <script type="text/javascript" src="static/js/request.js"></script>
+
+
+>>>>>>> domain
 {% endblock %}

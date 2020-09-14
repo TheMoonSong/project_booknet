@@ -5,6 +5,8 @@ const queryParams ='search/';
 // Select elements
 let inputField = document.getElementById('bookSearch');
 let header = document.getElementById('bookList');
+    //at first hide the list card
+    header.style.display="none";
 let nextHeader= document.getElementById('h1');
 
 
@@ -31,29 +33,36 @@ const getBookInfo = () => {
   //load bookInfo
   xhr.onload = () =>{
     let bookInfo = xhr.response;
+
     populateHeader(bookInfo['items']);
-    showBookList(bookInfo['items']);
 
   }
+}
+function removeTag(String){
+    let orgText = String;
+    let newText = orgText.replace(/<(\/b|b)([^>]*)>/gi,"");
+    return newText
 }
 
 function populateHeader(jsonObj){
-   let bookHeader = document.createElement('h2');
-   let bookAuthor = document.createElement('p');
-   let bookPrice = document.createElement('p');
-    let bookDetail = document.createElement('p');
 
   for(let i=0;i<jsonObj.length;i++){
-       console.log(jsonObj[i]);
 
-            bookHeader.textContent = '책이름: '+jsonObj[i]['title'];
-            header.appendChild(bookHeader);
-            bookAuthor.textContent ='작가:'+jsonObj[i]['author'];
-            header.appendChild(bookAuthor);
-            bookPrice.textContent = '가격: '+jsonObj[i]['price'];
-            header.appendChild(bookPrice);
-            bookDetail.textContent = '상세정보: '+jsonObj[i]['description'];
-            header.appendChild(bookDetail);
+       let card = header.cloneNode(true);
+
+       let bookName = jsonObj[i]['title'];
+       let bookWriter = jsonObj[i]['author'];
+       let bookPrice = jsonObj[i]['price'];
+       let bookDetails = jsonObj[i]['description'];
+       let bookImg = jsonObj[i]['image'];
+       console.log(bookImg);
+
+       document.getElementById('bookName').innerHTML = removeTag(bookName);
+       document.getElementById('bookDetails').innerHTML = removeTag(bookDetails);
+       document.getElementsByClassName('mdl-card__title')[0].style.backgroundImage ="url("+bookImg+")";
+
+       header.appendChild(card);
+
 
 
   }
@@ -65,9 +74,7 @@ function populateHeader(jsonObj){
 
 
 }
-function showBookList(jsonObj){
-  let book
-}
+
 
 
 
@@ -75,8 +82,14 @@ function showBookList(jsonObj){
 function mykeydown(){
   if(event.keyCode == 13){
    getBookInfo();
+   header.style.display ="block";
+
   }
 }
+
+console.clear();
+
+angular.module('MyApp').controller('AppCtrl', function($scope) {});
 
 
 
