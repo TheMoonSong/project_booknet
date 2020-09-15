@@ -6,8 +6,10 @@ const queryParams ='search/';
 let inputField = document.getElementById('bookSearch');
 let header = document.getElementById('bookList');
     //at first hide the list card
-    header.style.display="none";
-let nextHeader= document.getElementById('h1');
+
+
+ //searched book will be listed here
+let nextHeader= document.getElementById('where_the_searched_book_listed');
 
 
 
@@ -33,11 +35,12 @@ const getBookInfo = () => {
   //load bookInfo
   xhr.onload = () =>{
     let bookInfo = xhr.response;
-
     populateHeader(bookInfo['items']);
 
   }
 }
+
+//검색어 API에 들어가 있는 <br>를 없애는 함수
 function removeTag(String){
     let orgText = String;
     let newText = orgText.replace(/<(\/b|b)([^>]*)>/gi,"");
@@ -48,37 +51,26 @@ function populateHeader(jsonObj){
 
   for(let i=0;i<jsonObj.length;i++){
 
-       let card = header.cloneNode(true);
-
        let bookName = jsonObj[i]['title'];
        let bookWriter = jsonObj[i]['author'];
-       let bookPrice = jsonObj[i]['price'];
        let bookDetails = jsonObj[i]['description'];
        let bookImg = jsonObj[i]['image'];
-       console.log(bookImg);
 
+       console.log(bookImg);
        document.getElementById('bookName').innerHTML = removeTag(bookName);
-       document.getElementById('bookDetails').innerHTML = removeTag(bookDetails);
+       document.getElementById('bookDetails').innerHTML = "작가: "+removeTag(bookWriter)+"<br>상세정보: "+removeTag(bookDetails);
        document.getElementsByClassName('mdl-card__title')[0].style.backgroundImage ="url("+bookImg+")";
 
-       header.appendChild(card);
+       console.log(header);
+       let card = header.cloneNode(true);
 
-
-
+       console.log(card);
+       nextHeader.appendChild(card);
   }
-
-
-
-
-
-
 
 }
 
-
-
-
-
+/*
 function mykeydown(){
   if(event.keyCode == 13){
    getBookInfo();
@@ -86,10 +78,22 @@ function mykeydown(){
 
   }
 }
+*/
+
+function myKeyFunc(){
+   getBookInfo();
+   if(inputField.value.length>1){
+       header.style.display ="block";
+   }else
+        header.style.display="none";
+
+
+
+}
 
 console.clear();
 
-angular.module('MyApp').controller('AppCtrl', function($scope) {});
+
 
 
 

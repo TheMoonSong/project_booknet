@@ -6,42 +6,20 @@
 
 {% block content %}
 
-<!-- Wide card with share menu button -->
-<style>
-.demo-card-wide.mdl-card {
-  width: 512px;
-}
-.demo-card-wide > .mdl-card__title {
-  color: #fff;
-  height: 176px;
-  background: url('https://img.huffingtonpost.com/asset/5d70682724000032007549cf.jpeg?ops=scalefit_630_noupscale') center / cover;
-}
-.demo-card-wide > .mdl-card__menu {
-  color: #fff;
-}
-</style>
+        <section class="bookSearching">
+          <h2> 책을 검색하세요 </h2>
+            <div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                    <label class="mdl-button mdl-js-button mdl-button--icon" for="bookSearch">
+                    <i class="material-icons">search</i>
+                    </label>
+                    <div class=mdl-textfield__expandable-holder>
+                    <input class="mdl-textfield__input" type="text" id="bookSearch" onkeydown="mykeydown()">
+                    <label class="mdl-textfield__label" for="sample-expandable"> Expandable Input</label>
 
-<div class="demo-card-wide mdl-card mdl-shadow--2dp">
-  <div class="mdl-card__title">
-    <h2 class="mdl-card__title-text" id="bookName">Welcome</h2>
-  </div>
-  <div class="mdl-card__supporting-text">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Mauris sagittis pellentesque lacus eleifend lacinia...
-  </div>
-  <div class="mdl-card__actions mdl-card--border">
-    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-      Get Started
-    </a>
-  </div>
-  <div class="mdl-card__menu">
-    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-      <i class="material-icons">share</i>
-    </button>
-  </div>
-</div>
-
-    <script type="text/javascript" src="static/js/request.js"></script>
-
+                    </div>
+                </div>
+            </div>
+        </section>
 
 {% endblock %}
