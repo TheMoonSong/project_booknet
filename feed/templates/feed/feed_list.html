@@ -5,13 +5,10 @@
 {% endblock %}
 
 {% block content %}
-
-    <div class="demo-grid-ruler mdl-grid">
-        <div class="mdl-cell mdl-cell--2-col"></div>
-        <div class="mdl-cell mdl-cell--4-col">
+    <div class="demo-grid-ruler mdl-grid" id="feedlistoutbox">
+        <div class="mdl-cell mdl-cell--8-col" id="feedlist">
 
             {% for object in object_list %}
-
             <style>
                 .demo-card-square.mdl-card {
                     width: 320px;
@@ -42,14 +39,21 @@
                     </div>
                 </div>
                 <br>
-
-
             {% endfor %}
 
         </div>
+    <div class="mdl-cell mdl-cell--2-col" id="dummyCol"></div>
+    <div class="mdl-cell mdl-cell--2-col" id="bookInfo"></div>
 
-        <div class="mdl-cell mdl-cell--4-col">
-
-        </div>
     </div>
+    <style>
+            #feedlist{
+            }
+            #feedlistoutbox{
+                width: 640px;
+                background-color: rgba(0, 0, 0, 0.5);
+
+            }
+        </style>
+
 {% endblock %}

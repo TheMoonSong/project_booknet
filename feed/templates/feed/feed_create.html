@@ -5,19 +5,41 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col"></div>
-        <div class="col-12 col-xl-8 col-md-8">
+        <div class="center_allign">
+        <div class="card">
             <div class="alert alert-primary" role="alert">
-                test
+                글을 씁니다.
             </div>
-            <form action="" method="post" enctype='multipart/form-data'>
-                {% csrf_token %}
+            <form action="http://127.0.0.1:8000/feed/9788932037561/create" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="csrfmiddlewaretoken" value="cInBMZGJi9zfSpTQu3WbhmGn5AtrP47LnnteK5XzGWhFYb3SrTY8o83sQCBEqEcZ">
 
-                {{form.as_p}}
-                <input type="submit" value="Upload" class="btn btn-primary">
+                <p>
+                    <label for="id_text"></label>
+                    <textarea class="form-control" name="text" cols="40" rows="10" id="id_text"></textarea>
+                </p>
+                    <!--<input type="file" name="image" accept="image/*" required="" id="id_image">-->
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="image" accept="image/*" required="" id="id_image">
+                    <label class="custom-file-label" for="inputGroupFile01">사진을 선택해주세요.</label>
+                </div>
+
+                <div id="upload_btn_p"><input type="submit" value="Upload" class="btn btn-primary" id="upload_btn"></div>
             </form>
         </div>
-    <div class="col"></div>
-</div>
+        </div>
+        <style>
+        .center_allign{
+            margin: 0 auto;
+            width: 500px;
+        }
+        .custom-file-label{
+            width:498px;
+        }
+        #upload_btn_p{
+            margin: 0 auto;
+            display : block;
+            width: 100px;
+
+        }
+
 {% endblock %}
