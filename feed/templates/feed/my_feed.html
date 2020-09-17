@@ -53,59 +53,29 @@
             <br>
             {% endfor %}
         </div>
-            <div class="mdl-cell mdl-cell--4-col" id="bookInfo">
-                <div class="card mb-3" style="max-width: 640px;" id="bookInfoCard">
-                    <div class="row no-gutters">
-                        <div class="col-md-4">
-                            <img src="{{ img_url }}" class="card-img" id="card-img">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title" id="bookName">{{ title }}</h5>
-                                <p class="card-text" id="author">{{ author }}</p>
-                                <p class="card-text" id="bookDetails">{{ description }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="disqus_thread"></div>
-            <script>
-                (function() {
-                    var d = document, s = d.createElement('script');
-                    s.src = 'https://project-booknet.disqus.com/embed.js';
-                    s.setAttribute('data-timestamp', +new Date());
-                    (d.head || d.body).appendChild(s);
-                })();
-            </script>
-                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                </div>
-            </div>
-
-        <!--<div class="mdl-cell mdl-cell--2-col" id="dummyCol"></div>-->
-    <!--<div class="mdl-cell mdl-cell--2-col" id="bookInfo"></div>-->
 
 </div>
 
-    <style>
-                .demo-card-square.mdl-card {
-                    width: 400px;
-                    height: 460px;
-                }
-                .demo-card-square > .mdl-card__title {
-                    color: #fff;
-                    /*background:"{{ object.image.url }}" bottom right 15% no-repeat #46B6AC;*/
-                }
-                .feed_photo{
-                    width: auto;
-                    height: auto;
-                    max-width: 400px;
-                    max-height: 500px;
-                }
-                .mdl-card--border{
-                    width: auto;
-                    height: auto;
-                }
-
-            </style>
+<style>
+.demo-card-square.mdl-card {
+width: 400px;
+height: 460px;
+}
+.demo-card-square > .mdl-card__title {
+color: #fff;
+/*background:"{{ object.image.url }}" bottom right 15% no-repeat #46B6AC;*/
+}
+.feed_photo{
+width: auto;
+height: auto;
+max-width: 400px;
+max-height: 500px;
+}
+.mdl-card--border{
+width: auto;
+height: auto;
+}
+</style>
 
     <style>
             #feedlist{
@@ -114,18 +84,10 @@
                 float: inside;
             }
             #bookcard{
-                margin-left: 0px;
-            }
-            #bookInfoCard{
-                width: 480px;
-                margin-right: 50px;
-            }
-            #bookInfo{
-                margin-right: 50px;
-                display: inline;
+                margin: 0 auto;
             }
             #feedlistoutbox{
-                width: 1280px;
+                width: 480px;
                 background-color: rgba(0, 0, 0, 0.5);
             }
             #feed_delete{

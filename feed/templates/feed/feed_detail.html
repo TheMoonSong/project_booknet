@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Path to books, Path to happy
+{% endblock %}
+
+{% block content %}
+        <div class="center_allign">
+            <div class="demo-card-square mdl-card mdl-shadow--2dp" id="card">
+                <div class="mdl-card__supporting-text" id="feed_author">
+                    {{object.author}}
+                </div>
+                <div class="mdl-card__supporting-text" id="feed_photo">
+                    <img class="feed_photo" src="{{ object.image.url }}">
+                </div>
+                <div class="mdl-card__supporting-text" id="feed_text">{{ object.text }}</div>
+                <div class="mdl-card__supporting-text">좋아요 : %d개</div>
+                <div class="mdl-card__actions mdl-card--border">
+
+                    {% if user == object.author %}  <!--자신이 작성한 글만 수정, 삭제가 가능하다-->
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                           href="/feed/{{ object.isbn }}/update/{{ object.id }}">수정</a>
+                        <form method="post" action="/feed/{{ object.isbn }}/delete/{{ object.id }}" id="feed_delete">
+                            {% csrf_token %}
+                            <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                                    onclick="return confirm('삭제하시겠습니까?')" type="submit">삭제</button>
+                        </form>
+                    {% endif %}
+                </div>
+                <div id="disqus_thread"></div>
+            <script>
+                (function() {
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://project-booknet.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            </div>
+        </div>
+
+        <style>
+        .center_allign{
+            padding: 10px;
+            width: 820px;
+            margin: 0 auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        #card{
+            width: 800px;
+            margin: 0 auto;
+        }
+        .feed_photo{
+            max-width: 780px;
+        }
+        #feed_delete{
+                display: inline;
+        }
+
+{% endblock %}
