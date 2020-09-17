@@ -7,17 +7,23 @@
 {% block content %}
     <div class="demo-grid-ruler mdl-grid" id="feedlistoutbox">
         <div class="mdl-cell mdl-cell--8-col" id="feedlist">
-
-            {% for object in object_list %}
             <style>
                 .demo-card-square.mdl-card {
-                    width: 320px;
-                    height: 320px;
+                    width: 350px;
+                    height: 350px;
                 }
                 .demo-card-square > .mdl-card__title {
                     color: #fff;
-                    background:"{{ object.image.url }}" bottom right 15% no-repeat #46B6AC;
+                    /*background:"{{ object.image.url }}" bottom right 15% no-repeat #46B6AC;*/
                 }
+                .feed_photo{
+                    width: auto;
+                    height: auto;
+                    max-width: 300px;
+                    max-height: 300px;
+                }
+            {% for object in object_list %}
+
             </style>
 
                 <div class="demo-card-square mdl-card mdl-shadow--2dp">
@@ -26,8 +32,7 @@
                     </div>
 
                     <div class="mdl-card__supporting-text">
-                        <img src="{{ object.image.url }}">
-                        {{object.text}}
+                        <img class="feed_photo" src="{{ object.image.url }}">
                     </div>
                     <div class="mdl-card__supporting-text">
                         {{object.text}}

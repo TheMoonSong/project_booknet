@@ -53,7 +53,7 @@ function populateHeader(jsonObj){
        let bookName = jsonObj[i]['title'];
        let bookWriter = jsonObj[i]['author'];
        let bookDetails = jsonObj[i]['description'];
-       let bookImg = jsonObj[i]['image'];a
+       let bookImg = jsonObj[i]['image'];
 
        console.log(bookImg);
        document.getElementById('bookName').innerHTML = removeTag(bookName);
