@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'feed',
+    'django.contrib.sites',
+    'disqus',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +134,6 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL ='/'
 
 AUTH_USER_MODEL = 'accounts.User'
+
+DISQUS_WEBSITE_SHORNAME = 'project-booknet'
+SITE_ID = 1

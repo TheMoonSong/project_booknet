@@ -8,21 +8,20 @@
 
     {% if user.is_authenticated %}
         <div id="bookSearchingPage" >
-        <section class="bookSearching">
-          <h2> 책을 검색하세요 </h2>
-            <div>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
-                    <label class="mdl-button mdl-js-button mdl-button--icon" for="bookSearch">
-                    <i class="material-icons">search</i>
-                    </label>
-                    <div class=mdl-textfield__expandable-holder>
-                           <input class="mdl-textfield__input" type="text" id="bookSearch" onkeypress="if(event.keyCode==13){myKeyFunc();}">
+            <section class="bookSearching">
+                <h2> 책을 검색하세요 </h2>
+                <div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                        <label class="mdl-button mdl-js-button mdl-button--icon" for="bookSearch">
+                            <i class="material-icons">search</i>
+                        </label>
+                        <div class=mdl-textfield__expandable-holder>
+                            <input class="mdl-textfield__input" type="text" id="bookSearch" onkeypress="if(event.keyCode==13){myKeyFunc();}">
                             <label class="mdl-textfield__label" for="sample-expandable"> Expandable Input</label>
-
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
         <style>
             .demo-card-wide.mdl-card {
@@ -30,10 +29,13 @@
             }
 
             .demo-card-wide > .mdl-card__title {
+                display: inline;
+                width: 240px;
+                height: 176px;
+
               color: black;
-              height: 176px;
               font-family: 'Song Myung', serif;
-              background-image: url(https://img.huffingtonpost.com/asset/5d70682724000032007549cf.jpeg?ops=scalefit_630_noupscale);
+              /*background-image: url(https://img.huffingtonpost.com/asset/5d70682724000032007549cf.jpeg?ops=scalefit_630_noupscale);*/
               background-repeat: no-repeat;
               background-size: cover;
               background-color: black;
@@ -52,42 +54,56 @@
                 width: 640px;
                 margin: 0 auto;
             }
-            </style>
+            .div_img_title{
+                float: left;
+            }
+            #book_img{
+                float: left;
+                width: 180px;
+            }
+            .card-img{
+                width: 180px;
+            }
+        </style>
 
-        <div id="bookList" class="bookList">
-
-
+    <div id="bookList" class="bookList">
+        <!--
         <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-          <div class="mdl-card__title">
-            <h2 class="mdl-card__title-text" id="bookName">Welcome</h2>
-          </div>
-          <div class="mdl-card__supporting-text" id="bookDetails">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Mauris sagittis pellentesque lacus eleifend lacinia...
-          </div>
-          <div class="mdl-card__actions mdl-card--border">
-            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-              피드보기
-            </a>
-            <!--좋아요(추천수) 구현하기-->
-            <span class="mdl-badge" data-badge="4">추천</span>
-          </div>
-
-
-          <div class="mdl-card__menu">
-            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-              <i class="material-icons">share</i>
-            </button>
-
-          </div>
+            <div class="div_img_title">
+                <img src="https://image.aladin.co.kr/product/19483/1/cover500/k582635822_1.jpg" id="book_img">
+                <text class="mdl-card__title-text" id="bookName">Welcome</text>
+                <div class="mdl-card__supporting-text" id="bookDetails">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Mauris sagittis pellentesque lacus eleifend lacinia...
+            </div>
         </div>
-
+            <div class="mdl-card__actions mdl-card--border">
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                     피드보기</a>
+            </div>
         </div>
+        -->
+        <div class="card mb-3" style="max-width: 640px;" id="card">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="" class="card-img" id="card-img">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title" id="bookName">Card title</h5>
+                        <p class="card-text" id="author"></p>
+                        <p class="card-text" id="bookDetails">책 소개란</p>
+                        <p class="card-text"><small class="text-muted">기타 정보</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
         <div id =where_the_searched_book_listed>
         <!--책 검색 후 리스트들이 for문 반복을 통해 여기에 추가될 것-->
         </div>
-</div>
 
     {% else %}
     <form method="POST" action="{% url 'accounts:login' %}">

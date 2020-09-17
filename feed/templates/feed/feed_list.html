@@ -6,11 +6,12 @@
 
 {% block content %}
     <div class="demo-grid-ruler mdl-grid" id="feedlistoutbox">
+
         <div class="mdl-cell mdl-cell--8-col" id="feedlist">
             <style>
                 .demo-card-square.mdl-card {
-                    width: 350px;
-                    height: 350px;
+                    width: 400px;
+                    height: 460px;
                 }
                 .demo-card-square > .mdl-card__title {
                     color: #fff;
@@ -19,24 +20,27 @@
                 .feed_photo{
                     width: auto;
                     height: auto;
-                    max-width: 300px;
-                    max-height: 300px;
+                    max-width: 400px;
+                    max-height: 500px;
+                }
+                .mdl-card--border{
+                    width: auto;
+                    height: auto;
                 }
             {% for object in object_list %}
 
             </style>
 
                 <div class="demo-card-square mdl-card mdl-shadow--2dp">
-                    <div class="mdl-card__supporting-text">
+                    <div class="mdl-card__supporting-text" id="feed_author">
                         {{object.author}}
                     </div>
-
-                    <div class="mdl-card__supporting-text">
+                    <div class="mdl-card__supporting-text" id="feed_photo">
                         <img class="feed_photo" src="{{ object.image.url }}">
                     </div>
-                    <div class="mdl-card__supporting-text">
-                        {{object.text}}
-                    </div>
+                    <div class="mdl-card__supporting-text" id="feed_text">{{ object.text }}</div>
+                    <div class="mdl-card__supporting-text">좋아요 : %d개 댓글 : %d개</div>
+
                     <div class="mdl-card__actions mdl-card--border">
                         <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">댓글달기</a>
 
@@ -53,20 +57,26 @@
                 </div>
                 <br>
             {% endfor %}
-
         </div>
-
-    <div class="mdl-cell mdl-cell--2-col" id="dummyCol"></div>
-    <div class="mdl-cell mdl-cell--2-col" id="bookInfo"></div>
-
+    <div class="mdl-cell mdl-cell--4-col" id="bookInfo"></div>
+    <!--<div class="mdl-cell mdl-cell--2-col" id="dummyCol"></div>-->
+    <!--<div class="mdl-cell mdl-cell--2-col" id="bookInfo"></div>-->
     </div>
+
     <style>
             #feedlist{
+                display: inline;
+
+            }
+            #photo_div{
+                height: 260px;
+            }
+            #bookInfo{
+                display: inline;
             }
             #feedlistoutbox{
-                width: 640px;
+                width: 960px;
                 background-color: rgba(0, 0, 0, 0.5);
-
             }
             #feed_delete{
                 display: inline;
