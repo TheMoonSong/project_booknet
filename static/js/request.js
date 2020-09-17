@@ -6,8 +6,7 @@ const queryParams ='search/';
 let inputField = document.getElementById('bookSearch');
 let header = document.getElementById('bookList');
     //at first hide the list card
-
-
+    header.style.display="none";
  //searched book will be listed here
 let nextHeader= document.getElementById('where_the_searched_book_listed');
 
@@ -54,7 +53,7 @@ function populateHeader(jsonObj){
        let bookName = jsonObj[i]['title'];
        let bookWriter = jsonObj[i]['author'];
        let bookDetails = jsonObj[i]['description'];
-       let bookImg = jsonObj[i]['image'];
+       let bookImg = jsonObj[i]['image'];a
 
        console.log(bookImg);
        document.getElementById('bookName').innerHTML = removeTag(bookName);
