@@ -7,18 +7,16 @@
 {% block content %}
         <div class="center_allign">
         <div class="card">
-            <div class="alert alert-primary" role="alert">
-                글을 씁니다.
-            </div>
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="hidden" name="csrfmiddlewaretoken" value="cInBMZGJi9zfSpTQu3WbhmGn5AtrP47LnnteK5XzGWhFYb3SrTY8o83sQCBEqEcZ">
 
                 <p>
-                    <label for="id_text"></label>
-                    <textarea class="form-control" name="text" cols="40" rows="10" id="id_text"></textarea>
+                    <label for="id_text">{{ object.author }}</label>
+                    <textarea class="form-control" name="text" cols="40" rows="10" id="id_text">{{ object.text }}</textarea>
                 </p>
                     <!--<input type="file" name="image" accept="image/*" required="" id="id_image">-->
+                <label> 현재 사진 : </label><a href="{{ object.image.url }}">{{ object.image.url }}</a>
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" name="image" accept="image/*" required="" id="id_image">
                     <label class="custom-file-label" for="inputGroupFile01">사진을 선택해주세요.</label>

@@ -38,15 +38,24 @@
                         {{object.text}}
                     </div>
                     <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                            댓글달기
-                        </a>
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">댓글달기</a>
+
+                        {% if user == object.author %}  <!--자신이 작성한 글만 수정, 삭제가 가능하다-->
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                           href="{{ object.isbn }}/update/{{ object.id }}">수정</a>
+                        <form method="post" action="{{ object.isbn }}/delete/{{ object.id }}" id="feed_delete">
+                            {% csrf_token %}
+                            <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                           onclick="return confirm('삭제하시겠습니까?')" type="submit">삭제</button>
+                        </form>
+                        {% endif %}
                     </div>
                 </div>
                 <br>
             {% endfor %}
 
         </div>
+
     <div class="mdl-cell mdl-cell--2-col" id="dummyCol"></div>
     <div class="mdl-cell mdl-cell--2-col" id="bookInfo"></div>
 
@@ -58,6 +67,9 @@
                 width: 640px;
                 background-color: rgba(0, 0, 0, 0.5);
 
+            }
+            #feed_delete{
+                display: inline;
             }
         </style>
 

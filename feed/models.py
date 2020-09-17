@@ -12,4 +12,8 @@ class Feed(models.Model):
     image = models.ImageField(upload_to='timeline')
     created = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['-created']
+
+
 # Create your models here.

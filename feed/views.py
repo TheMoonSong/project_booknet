@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from .models import Feed
 from .forms import FeedForm
 
@@ -10,7 +10,7 @@ class FeedList(ListView):   #display all the feeds
 
 def list_feed(request, _isbn):
     feed_list = Feed.objects.filter(isbn=_isbn)
-    context = {'object_list' : feed_list}
+    context = {'object_list' : feed_list, 'isbn':_isbn}
     return render(request, 'feed/feed_list.html', context=context)
 
 def create_feed(request, _isbn):
@@ -35,3 +35,13 @@ class FeedCreate(CreateView):
             return redirect('/')
         else:
             return self.render_to_response({'form':form})
+
+class FeedDelete(DeleteView):
+    model = Feed
+    success_url = '/feed/'
+
+class FeedUpdate(UpdateView):
+    model = Feed
+    fields = ['text', 'image']
+    template_name_suffix = '_update'
+    success_url = '/feed/'
