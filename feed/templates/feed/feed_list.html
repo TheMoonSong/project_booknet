@@ -50,7 +50,7 @@
                         {{object.author}}
                     </div>
                 <hr class="feed_line_between_title_photo">
-                    <div class="mdl-card__supporting-text" id="feed_photo">
+                    <div class="mdl-card__supporting-img" id="feed_photo_div">
                         <img class="feed_photo" src="{{ object.image.url }}">
                     </div>
                     <div class="mdl-card__supporting-text" id="feed_text">{{ object.text }}</div>
@@ -116,27 +116,25 @@
             </script>
                 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
                 </div>
-            </div>
+        </div>
 
-        <!--<div class="mdl-cell mdl-cell--2-col" id="dummyCol"></div>-->
-    <!--<div class="mdl-cell mdl-cell--2-col" id="bookInfo"></div>-->
-
-</div>
+    </div>
 
     <style>
                 .demo-card-square.mdl-card {
                     width: 400px;
-                    height: 460px;
+                    height: auto;
                 }
                 .demo-card-square > .mdl-card__title {
                     color: #fff;
                     /*background:"{{ object.image.url }}" bottom right 15% no-repeat #46B6AC;*/
                 }
+		#feed_photo_div{
+			text-align: center;
+		}
                 .feed_photo{
-                    width: auto;
-                    height: auto;
-                    max-width: 400px;
-                    max-height: 500px;
+                    max-width: 370px;
+                    max-height: 230px;
                 }
                 .mdl-card--border{
                     width: auto;
@@ -170,7 +168,6 @@
             #feed_delete{
                 display: inline;
             }
-
              @font-face {
             font-family: 'GyeonggiBatang';
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiBatang.woff') format('woff');

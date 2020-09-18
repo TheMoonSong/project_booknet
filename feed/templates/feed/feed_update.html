@@ -8,8 +8,7 @@
         <div class="center_allign">
         <div class="card">
             <form action="" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <input type="hidden" name="csrfmiddlewaretoken" value="cInBMZGJi9zfSpTQu3WbhmGn5AtrP47LnnteK5XzGWhFYb3SrTY8o83sQCBEqEcZ">
+                {% csrf_token %}                
 
                 <p>
                     <label for="id_text">{{ object.author }}</label>

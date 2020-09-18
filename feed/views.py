@@ -78,12 +78,8 @@ class FeedUpdate(UpdateView):   #수정
     model = Feed
     fields = ['text', 'image']
     template_name_suffix = '_update'
+    success_url = '/'
 
-    def get_context_data(self, **kwargs):
-        if kwargs['_isbn']:
-            self.success_url = '/feed/' + str(kwargs['_isbn'])
-        else:
-            self.success_url = '/feed/myfeed'
 
 class FeedDetail(DetailView):   #댓글 버튼을 눌렀을 때 리디렉션 되는 detail 뷰
     model = Feed
