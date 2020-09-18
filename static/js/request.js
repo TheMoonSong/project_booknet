@@ -1,6 +1,7 @@
 // Information to reach API
 const url =document.location.href;
 const queryParams ='search/';
+const feedParams ='feed/';
 
 // Select elements
 let inputField = document.getElementById('bookSearch');
@@ -9,8 +10,6 @@ let header = document.getElementById('bookList');
     header.style.display="none";
  //searched book will be listed here
 let nextHeader= document.getElementById('where_the_searched_book_listed');
-
-
 
 
 // AJAX function
@@ -35,6 +34,7 @@ const getBookInfo = () => {
   xhr.onload = () =>{
     let bookInfo = xhr.response;
     populateHeader(bookInfo['items']);
+    //feedLink(bookInfo['items']);
 
   }
 }
@@ -48,26 +48,67 @@ function removeTag(String){
 
 function populateHeader(jsonObj){
 
-  for(let i=0;i<jsonObj.length;i++){
+    for(let i=0; i<jsonObj.length; i++){
 
-       let bookName = jsonObj[i]['title'];
-       let bookWriter = jsonObj[i]['author'];
-       let bookDetails = jsonObj[i]['description'];
-       let bookImg = jsonObj[i]['image'];
 
-       console.log(bookImg);
-       document.getElementById('bookName').innerHTML = removeTag(bookName);
-       document.getElementById('bookDetails').innerHTML = "작가: "+removeTag(bookWriter)+"<br>상세정보: "+removeTag(bookDetails);
-       document.getElementsByClassName('mdl-card__title')[0].style.backgroundImage ="url("+bookImg+")";
+        let bookName = jsonObj[i]['title'];
+        console.log(bookName);
+        let bookWriter = jsonObj[i]['author'];
+        console.log(bookWriter);
+        let bookDetails = jsonObj[i]['description'];
+        console.log(bookDetails);
+        let bookImg = jsonObj[i]['image'];
+        console.log(bookImg);
+        let bookIsbn = jsonObj[i]['isbn'].split(' ')[1];
+        console.log(bookIsbn);
 
-       console.log(header);
-       let card = header.cloneNode(true);
+        document.getElementById('bookName').innerHTML = removeTag(bookName);
+        document.getElementById('author').innerHTML = "작가: "+removeTag(bookWriter)+"<br>상세정보: "+removeTag(bookDetails);
+        //document.getElementsByClassName('mdl-card__title')[0].style.backgroundImage ="url("+bookImg+")";
+        document.getElementById('card-img').src = bookImg;
+        console.log(url+feedParams+bookIsbn);
+        let flink = url+feedParams+bookIsbn;
+        document.getElementById('feedLink').setAttribute('href',flink);
 
-       console.log(card);
-       nextHeader.appendChild(card);
-  }
+
+        let card = header.cloneNode(true);
+        nextHeader.append(card);
+
+        console.log(document.getElementById('feedButton'));
+
+
+    }
+
+     header.style.display="none";
 
 }
+
+
+/*
+function clickHandler(e){
+        console.log(e.target.innerHTML);
+
+}
+const buttons = document.querySelectorAll('.mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab');
+console.log(buttons);
+
+function feedLink(jsonObj){
+    for(let i=0;i<jsonObj.length;i++){
+         let bookIsbn = jsonObj[i]['isbn'].split(' ')[1];
+         console.log("new"+bookIsbn);
+    }
+    for(const buttonLink of buttons){
+        console.log(buttons);
+        console.log(buttonLink);
+        buttonLink.addEventListener('click', clickHandler);
+    }
+
+    header.style.display="none";
+
+}
+
+*/
+
 
 /*
 function mykeydown(){
@@ -86,11 +127,20 @@ function myKeyFunc(){
    }else
         header.style.display="none";
 
+}
+function myRefresh(){
 
-
+    location.href = url+feedParams;
 }
 
 console.clear();
+
+function myFeedFunc(string){
+    console.log(string);
+   location.href = url+feedParams+string;
+
+
+}
 
 
 
