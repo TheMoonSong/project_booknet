@@ -12,6 +12,8 @@ class Feed(models.Model):
     image = models.ImageField(upload_to='timeline')
     created = models.DateTimeField(auto_now_add=True)
 
+    like = models.ManyToManyField(User, related_name='like', blank=True)
+
     class Meta:
         ordering = ['-created']
 

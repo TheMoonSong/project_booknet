@@ -11,5 +11,5 @@ urlpatterns = [
     path('<int>/delete/<int:pk>', FeedDelete.as_view(), name='delete'),
     path('<int>/update/<int:pk>', FeedUpdate.as_view(), name='update'),
     path('<int>/detail/<int:pk>', FeedDetail.as_view(), name='detail'),
-
+    path('like/<int:pk>', LikeView.as_view(), name='like'),
 ]

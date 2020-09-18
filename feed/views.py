@@ -1,10 +1,14 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.views.generic.base import View
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.detail import DetailView
+from django.urls import reverse
 from .models import Feed
 from .forms import FeedForm
 from booknet.views import searchBook_adv
+from urllib.parse import urlparse
 
 class FeedList(ListView):   #display all the feeds
     model = Feed
@@ -18,7 +22,6 @@ def list_feed(request, _isbn):
     context = {'object_list' : feed_list, 'isbn':_isbn}
 
     bookdict = searchBook_adv(request, _isbn)['items']
-    print(len(bookdict))
 
     if len(bookdict) != 0:
         context['title'] = bookdict[0]['title']
@@ -73,3 +76,18 @@ class FeedUpdate(UpdateView):
 class FeedDetail(DetailView):
     model = Feed
     template_name_suffix = '_detail'
+
+class LikeView(View):
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:   #비회원인 경우 로그인
+            return redirect(reverse('accounts:signup'))
+        else:
+            user = request.user
+            feed = Feed.objects.get(pk=kwargs['pk'])
+            if user in feed.like.all():
+                feed.like.remove(user)
+            else:
+                feed.like.add(user)
+            referer_url = request.META.get('HTTP_REFERER')
+            path = urlparse(referer_url).path
+            return HttpResponseRedirect(path)

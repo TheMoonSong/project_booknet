@@ -122,7 +122,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'booknet', 'static'),
-    #os.path.join(BASE_DIR,'feed', 'static'),
+    os.path.join(BASE_DIR,'feed', 'static'),
     os.path.join(BASE_DIR,'media'),
     ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')

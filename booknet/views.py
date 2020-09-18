@@ -43,7 +43,7 @@ def searchBook_adv(request, _isbn):
     if (rescode == 200):
         response_body = response.read()
         data = json.loads(response_body.decode('utf-8'))
-        print(data)
+        #print(data)
         return data #dict
     else:
         print("Error code:" + rescode)

@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}
     Path to books, Path to happy
 {% endblock %}
@@ -33,7 +35,24 @@
                         <img class="feed_photo" src="{{ object.image.url }}">
                     </div>
                     <div class="mdl-card__supporting-text" id="feed_text">{{ object.text }}</div>
-                    <div class="mdl-card__supporting-text">좋아요 : %d개 댓글 : %d개</div>
+                    <div class="mdl-card__actions mdl-card--border" id="likeBar">
+                        {% if user in object.like.all %}
+                        <img class="like_btn" src="{% static 'img/like_activated.png'%}" onclick="location.href='{% url "feed:like" object.id %}'">
+                        {% else %}
+                        <img class="like_btn" src="{% static 'img/like_deactivated.png'%}" onclick="location.href='{% url "feed:like" object.id %}'">
+                        {% endif %}
+                        {{ object.like.all.count }}
+                        <style>
+                            #likeBar{
+                                min-height: 50px;
+                                display: inline;
+                            }
+                            .like_btn{
+                                height: 30px;
+                                width: 30px;
+                            }
+                        </style>
+                    </div>
 
                     <div class="mdl-card__actions mdl-card--border">
                         <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"

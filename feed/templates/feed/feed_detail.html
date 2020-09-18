@@ -4,6 +4,8 @@
     Path to books, Path to happy
 {% endblock %}
 
+{% load static %}
+
 {% block content %}
         <div class="center_allign">
             <div class="demo-card-square mdl-card mdl-shadow--2dp" id="card">
@@ -14,10 +16,24 @@
                     <img class="feed_photo" src="{{ object.image.url }}">
                 </div>
                 <div class="mdl-card__supporting-text" id="feed_text">{{ object.text }}</div>
-                <div class="mdl-card__supporting-text">좋아요 : %d개</div>
-                <div class="mdl-card__actions mdl-card--border">
-
-                    {% if user == object.author %}  <!--자신이 작성한 글만 수정, 삭제가 가능하다-->
+                <div class="mdl-card__actions mdl-card--border" id="likeBar">
+                        {% if user in object.like.all %}
+                        <img class="like_btn" src="{% static 'img/like_activated.png'%}" onclick="location.href='{% url "feed:like" object.id %}'">
+                        {% else %}
+                        <img class="like_btn" src="{% static 'img/like_deactivated.png'%}" onclick="location.href='{% url "feed:like" object.id %}'">
+                        {% endif %}
+                        {{ object.like.all.count }}
+                        <style>
+                            #likeBar{
+                                min-height: 50px;
+                                display: inline;
+                            }
+                            .like_btn{
+                                height: 30px;
+                                width: 30px;
+                            }
+                        </style>
+                     {% if user == object.author %}  <!--자신이 작성한 글만 수정, 삭제가 가능하다-->
                         <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
                            href="/feed/{{ object.isbn }}/update/{{ object.id }}">수정</a>
                         <form method="post" action="/feed/{{ object.isbn }}/delete/{{ object.id }}" id="feed_delete">
@@ -26,6 +42,10 @@
                                     onclick="return confirm('삭제하시겠습니까?')" type="submit">삭제</button>
                         </form>
                     {% endif %}
+                    </div>
+
+                <div class="mdl-card__actions mdl-card--border">
+
                 </div>
                 <div id="disqus_thread"></div>
             <script>
