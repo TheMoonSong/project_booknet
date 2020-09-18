@@ -1,3 +1,4 @@
+@import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
 
 h1{
    text-align: center;
@@ -6,22 +7,37 @@ h1{
    font-size: 50px;
    font-family: 'Song Myung', serif;
 
-
-
 }
-.login,
-.login_submission, 
-.signup, 
+
+.searchName{
+    font-family: 'MapoGoldenPier';
+}
+
+.loginAll,
+.signup,
 .logout_submission,
 .signup_submission,
-.bookSearching,
-.mdl-button mdl-js-button mdl-button--icon
+.mdl-button mdl-js-button mdl-button--icon,
+.mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect
 {
+    position: relative;
+    top: 80px;
     text-align: center;
     font-family: 'NEXON Lv1 Gothic OTF Light';
     color: white;
-}
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 50px;
+    margin: 0 auto;
+    width: 400px;
 
+
+}
+.bookSearching{
+    text-align: center;
+    position: relative;
+    top: 80px;
+    color: rgb(220, 220, 220);
+}
 
 @font-face {
     font-family: 'NEXON Lv1 Gothic OTF Light';
@@ -29,4 +45,14 @@ h1{
     font-weight: normal;
     font-style: normal;
 }
-                   
+
+.jejumyeongjo * {
+ font-family: 'Jeju Myeongjo', serif;
+}
+
+@font-face {
+    font-family: 'MapoGoldenPier';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoGoldenPierA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
