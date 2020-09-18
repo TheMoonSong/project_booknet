@@ -7,9 +7,23 @@
 {% block content %}
 
     {% if user.is_authenticated %}
+        <!--유저 확인 후 재로딩한 페이지에 적용할 폰트-->
+                <style>
+                    .searchName{
+                        font-family: 'MapoGoldenPier';
+                        font-size: 50px;
+
+                    }
+                    @font-face {
+                        font-family: 'MapoGoldenPier';
+                        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoGoldenPierA.woff') format('woff');
+                        font-weight: normal;
+                        font-style: normal;
+                    }
+                </style>
         <div id="bookSearchingPage" >
             <section class="bookSearching">
-                <h2> 책을 검색하세요 </h2>
+               <h2 class="searchName"> 책을 검색하세요 </h2>
                 <div>
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
                         <label class="mdl-button mdl-js-button mdl-button--icon" for="bookSearch">
@@ -47,7 +61,6 @@
             .bookList{
                 width: 640px;
                 margin: 0 auto;
-
             }
             .card-img{
                 width: 180px;
@@ -68,12 +81,14 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title" id="bookName">Card title</h5>
-                        <p class="card-text" id="author"></p>
-                        <p class="card-text" id="bookDetails">책 소개란</p>
+                        <h5 class="card-title" id="bookName">책 제목</h5>
+                            <p class="card-text" id="author"></p>
+                        <hr class="title_line">
+                        <p class="card-text" id="details">책 소개란</p>
+
                         <p class="card-text" id="littleText">
                             <a class="text-muted" id="feedLink" target="_self" href="https://getmdl.io/components/index.html#buttons-section">
-                                <img src="/static/img/chat_black.png" alt="책통하기" width="30px" height="30px">
+                                <img src="/static/img/agenda.png" alt="책통하기" width="45px" height="45px">
                             </a>
                         </p>
 
@@ -84,13 +99,17 @@
     </div>
 </div>
 
+
+        <br>
         <div id =where_the_searched_book_listed>
         <!--책 검색 후 리스트들이 for문 반복을 통해 여기에 추가될 것-->
         </div>
 
     {% else %}
+ <div class ="loginAll">
     <form method="POST" action="{% url 'accounts:login' %}">
         {% csrf_token %}
+
         <div class="login" id="login_div">
             <label for="username"> 아이디 : </label>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -107,17 +126,17 @@
         </div>
        <br>
        <section class="login_submission">
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit">
-            로그인
-          </button>
+           <button class="btn btn-secondary" type="submit">로그인
+              </button>
        </section>
     </form>
+ </div>
 
-
-    <br>
-    <section class="signup">
+    <div class="signup">
         <a href="{% url 'accounts:signup' %}" >아직 회원이 아니신가요?</a>
-    </section>
+    </div>
+
+
     {% endif %}
 
     <script type="text/javascript" src="static/js/request.js"></script>

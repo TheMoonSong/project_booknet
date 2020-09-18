@@ -58,17 +58,13 @@ function populateHeader(jsonObj){
         let bookName = jsonObj[i]['title'];
         console.log(bookName);
         let bookWriter = jsonObj[i]['author'];
-        console.log(bookWriter);
         let bookDetails = jsonObj[i]['description'];
-        console.log(bookDetails);
         let bookImg = jsonObj[i]['image'];
-        console.log(bookImg);
         let bookIsbn = jsonObj[i]['isbn'].split(' ')[1];
-        console.log(bookIsbn);
 
         document.getElementById('bookName').innerHTML = removeTag(bookName);
-        document.getElementById('author').innerHTML = "작가: "+removeTag(bookWriter)+"<br>상세정보: "+removeTag(bookDetails);
-        //document.getElementsByClassName('mdl-card__title')[0].style.backgroundImage ="url("+bookImg+")";
+        document.getElementById('author').innerHTML = "작가: "+removeTag(bookWriter);
+        document.getElementById('details').innerHTML = "상세정보: "+removeTag(bookDetails);
         document.getElementById('card-img').src = bookImg;
         console.log(url+feedParams+bookIsbn);
         let flink = url+feedParams+bookIsbn;
@@ -86,7 +82,7 @@ function populateHeader(jsonObj){
 
 function myKeyFunc(){
    getBookInfo();
-   if(inputField.value.length>1){
+   if(inputField.value.length>=1){
        header.style.display ="block";
    }else
         header.style.display="none";
