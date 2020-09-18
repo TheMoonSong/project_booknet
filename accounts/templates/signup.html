@@ -3,8 +3,9 @@
 {% block title %} Happy Reading for Everyone {% endblock %}
 
 {% block content %}
-
+<div class = signupAll>
     <form method="POST" action="{% url 'accounts:signup' %}">
+        {% csrf_token %}
         <section class="login">
             <label for="username"> 아이디 : </label>
 
@@ -28,11 +29,11 @@
             </div>
         </section>
         <section class="signup_submission">
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit">
+            <button class="btn btn-secondary" type="submit">
                 가입하기
             </button>
         </section>
     </form>
 
-
+</div>
 {% endblock %}

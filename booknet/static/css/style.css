@@ -14,9 +14,9 @@ h1{
 }
 
 .loginAll,
+.signupAll,
 .signup,
 .logout_submission,
-.signup_submission,
 .mdl-button mdl-js-button mdl-button--icon,
 .mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect
 {
