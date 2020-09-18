@@ -8,7 +8,7 @@
         <div class="center_allign">
         <div class="card">
             <div class="alert alert-primary" role="alert">
-                글을 씁니다.
+                글을 작성합니다.
             </div>
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -16,13 +16,15 @@
                     <label for="id_text"></label>
                     <textarea class="form-control" name="text" cols="40" rows="10" id="id_text"></textarea>
                 </p>
+                <br>
 
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" name="image" accept="image/*" required="" id="id_image">
                     <label class="custom-file-label" for="id_image">사진을 선택해주세요.</label>
                 </div>
-
-                <div id="upload_btn_p"><input type="submit" value="Upload" class="btn btn-primary" id="upload_btn"></div>
+                <br>
+                <br>
+                <div id="upload_btn_p"><input type="submit" value="Upload" class="btn btn-secondary" id="upload_btn"></div>
             </form>
         </div>
         </div>
@@ -31,16 +33,30 @@
         .center_allign{
             margin: 0 auto;
             width: 500px;
+
+        }
+        .card{
+            padding: 15px;
+            font-family: 'GyeonggiBatang';
         }
         .custom-file-label{
-            width:498px;
+            width:450px;
+            margin: 0 auto;
         }
         #upload_btn_p{
-            margin: 0 auto;
+            margin:0 auto;
+            padding:10px;
             display : block;
             width: 100px;
 
         }
+        @font-face {
+            font-family: 'GyeonggiBatang';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiBatang.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         </style>
 
 {% endblock %}

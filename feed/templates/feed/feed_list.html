@@ -9,7 +9,28 @@
 {% block content %}
     <div class="demo-grid-ruler mdl-grid" id="feedlistoutbox">
         <div class="mdl-cell mdl-cell--8-col" id="feedlist">
-        <!--새글 작성 카드-->
+
+
+        <!--작성한 피드들 -->
+        {% if object_list == None %}
+            <div class="jumbotron">
+                <h1 class="display-4">Woops!</h1>
+                <p class="lead" align="center">피드가 없네요!</p>
+                <hr class="my-4">
+                <p>책과 함께하는 세상을 지향합니다. -책통행 개발진</p>
+                <button class="btn btn-primary btn-lg" role="button" onclick="location.href='/feed/{{ isbn }}/create'">작성하기</button>
+            </div>
+
+            <style>
+                .jumbotron{
+                    text-align: center;
+                    margin: 0 auto;
+                    width: 640px;
+                }
+            </style>
+
+            {% else %}
+            <!--새글 작성 카드-->
           <div class="card" style="width: 50rem;">
             <div class="card-body">
               <h5 class="card-title">책소통하기</h5>
@@ -21,22 +42,7 @@
             </div>
         <br>
 
-        <!--작성한 피드들 -->
-        {% if object_list == None %}
-            <div class="jumbotron">
-                <h1 class="display-4">Woops!</h1>
-                <p class="lead" align="center">피드가 없네요!</p>
-                <hr class="my-4">
-                <p>책과 함께하는 세상을 지향합니다. -책통행 개발진</p>
-                <button class="btn btn-primary btn-lg" role="button" onclick="location.href='/feed/{{ isbn }}/create'">작성하기</button>
-            </div>
-            <style>
-                .jumbotron{
-                    text-align: center;
-                    margin: 0 auto;
-                    width: 640px;
-                }
-            </style>
+
         {% endif %}
             {% for object in object_list %}
                 <div class="demo-card-square mdl-card mdl-shadow--2dp" id="bookcard">
@@ -159,10 +165,18 @@
             #feedlistoutbox{
                 width: 1280px;
                 background-color: rgba(0, 0, 0, 0.5);
+                font-family: 'GyeonggiBatang';
             }
             #feed_delete{
                 display: inline;
             }
+
+             @font-face {
+            font-family: 'GyeonggiBatang';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiBatang.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
         </style>
 
 {% endblock %}

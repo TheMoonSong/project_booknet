@@ -13,7 +13,7 @@
                     {{object.author}}
                 </div>
                 <div class="mdl-card__supporting-text" id="feed_photo">
-                    <img class="feed_photo" src="{{ object.image.url }}">
+                    <img class="feed_photo" src="{{ object.image.url }}" id ="detail_photo">
                 </div>
                 <div class="mdl-card__supporting-text" id="feed_text">{{ object.text }}</div>
                 <div class="mdl-card__actions mdl-card--border" id="likeBar">
@@ -68,14 +68,20 @@
             background-color: rgba(0, 0, 0, 0.5);
         }
         #card{
+            padding: 15px;
             width: 800px;
             margin: 0 auto;
         }
-        .feed_photo{
+        #feed_photo{
             max-width: 780px;
+            margin: 0 auto;
         }
         #feed_delete{
                 display: inline;
+        }
+        #detail_photo{
+            max-height: 350px;
+            text-align: center;
         }
 
 {% endblock %}
