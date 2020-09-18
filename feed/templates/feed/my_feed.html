@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Path to books, Path to happy
+{% endblock %}
+
+{% block content %}
+    <div class="demo-grid-ruler mdl-grid" id="feedlistoutbox">
+        {% if object_list == None %}
+            <div class="jumbotron">
+                <h1 class="display-4">Woops!</h1>
+                <p class="lead" align="center">피드가 없네요!</p>
+                <hr class="my-4">
+                <p>책과 함께하는 세상을 지향합니다. -책통행 개발진</p>
+                <button class="btn btn-primary btn-lg" role="button" onclick="location.href='/feed/{{ isbn }}/create'">작성하기</button>
+            </div>
+            <style>
+                .jumbotron{
+                    text-align: center;
+                    margin: 0 auto;
+                    width: 640px;
+                }
+            </style>
+        {% endif %}
+
+        <div class="mdl-cell mdl-cell--8-col" id="feedlist">
+            {% for object in object_list %}
+                <div class="demo-card-square mdl-card mdl-shadow--2dp" id="bookcard">
+                    <div class="mdl-card__supporting-text" id="feed_author">
+                        {{object.author}}
+                    </div>
+                    <div class="mdl-card__supporting-text" id="feed_photo">
+                        <img class="feed_photo" src="{{ object.image.url }}">
+                    </div>
+                    <div class="mdl-card__supporting-text" id="feed_text">{{ object.text }}</div>
+
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                        href="{{ object.isbn }}/detail/{{ object.id }}">댓글</a>
+
+                        {% if user == object.author %}  <!--자신이 작성한 글만 수정, 삭제가 가능하다-->
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                           href="{{ object.isbn }}/update/{{ object.id }}">수정</a>
+                        <form method="post" action="{{ object.isbn }}/delete/{{ object.id }}" id="feed_delete">
+                            {% csrf_token %}
+                            <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                           onclick="return confirm('삭제하시겠습니까?')" type="submit">삭제</button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>  <!--bookCard end-->
+            <br>
+            {% endfor %}
+        </div>
+
+</div>
+
+<style>
+.demo-card-square.mdl-card {
+width: 400px;
+height: 460px;
+}
+.demo-card-square > .mdl-card__title {
+color: #fff;
+/*background:"{{ object.image.url }}" bottom right 15% no-repeat #46B6AC;*/
+}
+.feed_photo{
+width: auto;
+height: auto;
+max-width: 400px;
+max-height: 500px;
+}
+.mdl-card--border{
+width: auto;
+height: auto;
+}
+</style>
+
+    <style>
+            #feedlist{
+                width: 740px;
+                display: inline;
+                float: inside;
+            }
+            #bookcard{
+                margin: 0 auto;
+                height: 400px ;
+            }
+            #feedlistoutbox{
+                width: 480px;
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+            #feed_delete{
+                display: inline;
+            }
+        </style>
+
+{% endblock %}

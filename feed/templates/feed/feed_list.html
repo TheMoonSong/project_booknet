@@ -1,55 +1,155 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}
     Path to books, Path to happy
 {% endblock %}
 
 {% block content %}
-
-    <div class="demo-grid-ruler mdl-grid">
-        <div class="mdl-cell mdl-cell--2-col"></div>
-        <div class="mdl-cell mdl-cell--4-col">
-
-            {% for object in object_list %}
-
+    <div class="demo-grid-ruler mdl-grid" id="feedlistoutbox">
+        {% if object_list == None %}
+            <div class="jumbotron">
+                <h1 class="display-4">Woops!</h1>
+                <p class="lead" align="center">피드가 없네요!</p>
+                <hr class="my-4">
+                <p>책과 함께하는 세상을 지향합니다. -책통행 개발진</p>
+                <button class="btn btn-primary btn-lg" role="button" onclick="location.href='/feed/{{ isbn }}/create'">작성하기</button>
+            </div>
             <style>
+                .jumbotron{
+                    text-align: center;
+                    margin: 0 auto;
+                    width: 640px;
+                }
+            </style>
+        {% endif %}
+
+        <div class="mdl-cell mdl-cell--8-col" id="feedlist">
+            {% for object in object_list %}
+                <div class="demo-card-square mdl-card mdl-shadow--2dp" id="bookcard">
+                    <div class="mdl-card__supporting-text" id="feed_author">
+                        {{object.author}}
+                    </div>
+                    <div class="mdl-card__supporting-text" id="feed_photo">
+                        <img class="feed_photo" src="{{ object.image.url }}">
+                    </div>
+                    <div class="mdl-card__supporting-text" id="feed_text">{{ object.text }}</div>
+                    <div class="mdl-card__actions mdl-card--border" id="likeBar">
+                        {% if user in object.like.all %}
+                        <img class="like_btn" src="{% static 'img/like_activated.png'%}" onclick="location.href='{% url "feed:like" object.id %}'">
+                        {% else %}
+                        <img class="like_btn" src="{% static 'img/like_deactivated.png'%}" onclick="location.href='{% url "feed:like" object.id %}'">
+                        {% endif %}
+                        {{ object.like.all.count }}
+                        <style>
+                            #likeBar{
+                                min-height: 50px;
+                                display: inline;
+                            }
+                            .like_btn{
+                                height: 30px;
+                                width: 30px;
+                            }
+                        </style>
+                    </div>
+
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                        href="{{ object.isbn }}/detail/{{ object.id }}">댓글</a>
+
+                        {% if user == object.author %}  <!--자신이 작성한 글만 수정, 삭제가 가능하다-->
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                           href="{{ object.isbn }}/update/{{ object.id }}">수정</a>
+                        <form method="post" action="{{ object.isbn }}/delete/{{ object.id }}" id="feed_delete">
+                            {% csrf_token %}
+                            <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                           onclick="return confirm('삭제하시겠습니까?')" type="submit">삭제</button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>  <!--bookCard end-->
+            <br>
+            {% endfor %}
+        </div>
+            <div class="mdl-cell mdl-cell--4-col" id="bookInfo">
+                <div class="card mb-3" style="max-width: 640px;" id="bookInfoCard">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="{{ img_url }}" class="card-img" id="card-img">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title" id="bookName">{{ title }}</h5>
+                                <p class="card-text" id="author">{{ author }}</p>
+                                <p class="card-text" id="bookDetails">{{ description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="disqus_thread"></div>
+            <script>
+                (function() {
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://project-booknet.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                </div>
+            </div>
+
+        <!--<div class="mdl-cell mdl-cell--2-col" id="dummyCol"></div>-->
+    <!--<div class="mdl-cell mdl-cell--2-col" id="bookInfo"></div>-->
+
+</div>
+
+    <style>
                 .demo-card-square.mdl-card {
-                    width: 320px;
-                    height: 320px;
+                    width: 400px;
+                    height: 460px;
                 }
                 .demo-card-square > .mdl-card__title {
                     color: #fff;
-                    background:"{{ object.image.url }}" bottom right 15% no-repeat #46B6AC;
+                    /*background:"{{ object.image.url }}" bottom right 15% no-repeat #46B6AC;*/
                 }
+                .feed_photo{
+                    width: auto;
+                    height: auto;
+                    max-width: 400px;
+                    max-height: 500px;
+                }
+                .mdl-card--border{
+                    width: auto;
+                    height: auto;
+                }
+
             </style>
 
-                <div class="demo-card-square mdl-card mdl-shadow--2dp">
-                    <div class="mdl-card__supporting-text">
-                        {{object.author}}
-                    </div>
+    <style>
+            #feedlist{
+                width: 740px;
+                display: inline;
+                float: inside;
+            }
+            #bookcard{
+                margin-left: 0px;
+            }
+            #bookInfoCard{
+                width: 480px;
+                margin-right: 50px;
+            }
+            #bookInfo{
+                margin-right: 50px;
+                display: inline;
+            }
+            #feedlistoutbox{
+                width: 1280px;
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+            #feed_delete{
+                display: inline;
+            }
+        </style>
 
-                    <div class="mdl-card__supporting-text">
-                        <img src="{{ object.image.url }}">
-                        {{object.text}}
-                    </div>
-                    <div class="mdl-card__supporting-text">
-                        {{object.text}}
-                    </div>
-                    <div class="mdl-card__actions mdl-card--border">
-                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                            댓글달기
-                        </a>
-                    </div>
-                </div>
-                <br>
-
-
-            {% endfor %}
-
-        </div>
-
-        <div class="mdl-cell mdl-cell--4-col">
-
-        </div>
-    </div>
 {% endblock %}
