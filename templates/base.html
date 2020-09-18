@@ -60,7 +60,9 @@
             <span class="mdl-layout-title">책통행</span>
             <nav class="mdl-navigation">
                 <a class="mdl-navigation__link" href="{% url 'index' %}">홈</a>
+                {% if user.is_authenticated %}
                 <a class="mdl-navigation__link" href="{% url 'feed:myfeed' %}">내가 쓴 피드 보기</a>
+                {% endif %}
             </nav>
         </div>
 
@@ -72,8 +74,6 @@
 
     </div>
 
-
     </body>
 
-    
 </html>

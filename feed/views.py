@@ -16,14 +16,13 @@ class FeedList(ListView):   #display all the feeds
 
 def list_feed(request, _isbn):
     feed_list = Feed.objects.filter(isbn=_isbn)
-    if len(feed_list) == 0:
-        feed_list = None
-
+    if len(feed_list) == 0: feed_list = None
     context = {'object_list' : feed_list, 'isbn':_isbn} #for template language
 
-    bookdict = searchBook_adv(request, _isbn)['items']  #book data from Naver database
+    #네이버로부터 상세 검색 API를 통해 책의 정보를 얻어온다.
+    bookdict = searchBook_adv(request, _isbn)['items']
 
-    if len(bookdict) != 0:  #받아온 데이터가 있을 때
+    if len(bookdict) != 0:  #검색 성공
         context['title'] = bookdict[0]['title']
         context['author'] = bookdict[0]['author']
         context['img_url'] = bookdict[0]['image']
@@ -33,8 +32,7 @@ def list_feed(request, _isbn):
 
 def my_feed(request):
     feed_list = Feed.objects.filter(author=request.user)
-    if len(feed_list) == 0:
-        feed_list = None
+    if len(feed_list) == 0: feed_list = None
     context = {'object_list': feed_list}
     return render(request, 'feed/my_feed.html', context=context)
 
@@ -45,9 +43,9 @@ def create_feed(request, _isbn):
     if request.method == 'POST':
         new = Feed.objects.create(isbn=_isbn, author=request.user, text=request.POST['text'], image=request.FILES['image'])
         new.save()      #save to database
-        return redirect('/')
+        return redirect('/feed/%d'%_isbn)
 
-class FeedCreate(CreateView):   #생성
+class FeedCreate(CreateView):
     model = Feed
     fields = ['text', 'image']
     template_name_suffix = '_create'
@@ -65,11 +63,27 @@ class FeedDelete(DeleteView):   #삭제
     model = Feed
     success_url = '/feed/'
 
+    def post(self, request, *args, **kwargs):
+        remove = Feed.objects.get(pk=kwargs['pk'])
+        if '_isbn' in kwargs:
+            remove.delete()
+            self.success_url += str(kwargs['_isbn'])
+            return HttpResponseRedirect(self.success_url)
+        else:
+            remove.delete()
+            self.success_url += 'myfeed'
+            return HttpResponseRedirect(self.success_url)
+
 class FeedUpdate(UpdateView):   #수정
     model = Feed
     fields = ['text', 'image']
     template_name_suffix = '_update'
-    success_url = '/feed/'
+
+    def get_context_data(self, **kwargs):
+        if kwargs['_isbn']:
+            self.success_url = '/feed/' + str(kwargs['_isbn'])
+        else:
+            self.success_url = '/feed/myfeed'
 
 class FeedDetail(DetailView):   #댓글 버튼을 눌렀을 때 리디렉션 되는 detail 뷰
     model = Feed

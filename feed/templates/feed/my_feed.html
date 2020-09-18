@@ -12,7 +12,6 @@
                 <p class="lead" align="center">피드가 없네요!</p>
                 <hr class="my-4">
                 <p>책과 함께하는 세상을 지향합니다. -책통행 개발진</p>
-                <button class="btn btn-primary btn-lg" role="button" onclick="location.href='/feed/{{ isbn }}/create'">작성하기</button>
             </div>
             <style>
                 .jumbotron{
@@ -41,7 +40,7 @@
                         {% if user == object.author %}  <!--자신이 작성한 글만 수정, 삭제가 가능하다-->
                         <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
                            href="{{ object.isbn }}/update/{{ object.id }}">수정</a>
-                        <form method="post" action="{{ object.isbn }}/delete/{{ object.id }}" id="feed_delete">
+                        <form method="post" action="{% url 'feed:delete_from_myfeed' object.id %}" id="feed_delete">
                             {% csrf_token %}
                             <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
                            onclick="return confirm('삭제하시겠습니까?')" type="submit">삭제</button>
