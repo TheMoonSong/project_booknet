@@ -48,8 +48,12 @@ function removeTag(String){
 
 function populateHeader(jsonObj){
 
-    for(let i=0; i<jsonObj.length; i++){
+    /*nextHeader.style.display='none';*/
+    $(document).ready();
+    let booklist = $('#where_the_searched_book_listed')
+    booklist.animate({opacity:0},0);
 
+    for(let i=0; i<jsonObj.length; i++){
 
         let bookName = jsonObj[i]['title'];
         console.log(bookName);
@@ -70,22 +74,15 @@ function populateHeader(jsonObj){
         let flink = url+feedParams+bookIsbn;
         document.getElementById('feedLink').setAttribute('href',flink);
 
-
         let card = header.cloneNode(true);
         nextHeader.append(card);
 
         console.log(document.getElementById('feedButton'));
 
-
     }
-
-     header.style.display="none";
-
+    header.style.display="none";
+    booklist.animate({opacity:1, queue:false}, 500);
 }
-
-
-
-
 
 function myKeyFunc(){
    getBookInfo();
