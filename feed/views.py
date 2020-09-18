@@ -19,17 +19,15 @@ def list_feed(request, _isbn):
     if len(feed_list) == 0:
         feed_list = None
 
-    context = {'object_list' : feed_list, 'isbn':_isbn}
+    context = {'object_list' : feed_list, 'isbn':_isbn} #for template language
 
-    bookdict = searchBook_adv(request, _isbn)['items']
+    bookdict = searchBook_adv(request, _isbn)['items']  #book data from Naver database
 
-    if len(bookdict) != 0:
+    if len(bookdict) != 0:  #받아온 데이터가 있을 때
         context['title'] = bookdict[0]['title']
         context['author'] = bookdict[0]['author']
         context['img_url'] = bookdict[0]['image']
         context['description'] = bookdict[0]['description']
-    else:
-        pass
 
     return render(request, 'feed/feed_list.html', context=context)
 
@@ -46,10 +44,10 @@ def create_feed(request, _isbn):
         return render(request, 'feed/feed_create.html', {'form':form})
     if request.method == 'POST':
         new = Feed.objects.create(isbn=_isbn, author=request.user, text=request.POST['text'], image=request.FILES['image'])
-        new.save()
+        new.save()      #save to database
         return redirect('/')
 
-class FeedCreate(CreateView):
+class FeedCreate(CreateView):   #생성
     model = Feed
     fields = ['text', 'image']
     template_name_suffix = '_create'
@@ -63,31 +61,31 @@ class FeedCreate(CreateView):
         else:
             return self.render_to_response({'form':form})
 
-class FeedDelete(DeleteView):
+class FeedDelete(DeleteView):   #삭제
     model = Feed
     success_url = '/feed/'
 
-class FeedUpdate(UpdateView):
+class FeedUpdate(UpdateView):   #수정
     model = Feed
     fields = ['text', 'image']
     template_name_suffix = '_update'
     success_url = '/feed/'
 
-class FeedDetail(DetailView):
+class FeedDetail(DetailView):   #댓글 버튼을 눌렀을 때 리디렉션 되는 detail 뷰
     model = Feed
     template_name_suffix = '_detail'
 
 class LikeView(View):
     def get(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:   #비회원인 경우 로그인
+        if not request.user.is_authenticated:   #비회원인 경우 회원가입 링크로 유도
             return redirect(reverse('accounts:signup'))
         else:
             user = request.user
-            feed = Feed.objects.get(pk=kwargs['pk'])
-            if user in feed.like.all():
-                feed.like.remove(user)
+            feed = Feed.objects.get(pk=kwargs['pk'])    #피드의 고유 아이디로 필터링
+            if user in feed.like.all(): #like를 누른 user 중에 있다면
+                feed.like.remove(user)  #like취소
             else:
                 feed.like.add(user)
-            referer_url = request.META.get('HTTP_REFERER')
+            referer_url = request.META.get('HTTP_REFERER')  #참조 url로 리디렉션
             path = urlparse(referer_url).path
             return HttpResponseRedirect(path)
