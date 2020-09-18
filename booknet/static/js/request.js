@@ -1,6 +1,7 @@
 // Information to reach API
 const url =document.location.href;
 const queryParams ='search/';
+const feedParams ='feed/';
 
 // Select elements
 let inputField = document.getElementById('bookSearch');
@@ -9,6 +10,7 @@ let header = document.getElementById('bookList');
     header.style.display="none";
  //searched book will be listed here
 let nextHeader= document.getElementById('where_the_searched_book_listed');
+
 
 // AJAX function
 const getBookInfo = () => {
@@ -33,6 +35,7 @@ const getBookInfo = () => {
     let bookInfo = xhr.response;
     populateHeader(bookInfo['items']);
 
+
   }
 }
 
@@ -44,11 +47,10 @@ function removeTag(String){
 }
 
 function populateHeader(jsonObj){
-    let origin = document.getElementById('bookList')
 
     for(let i=0; i<jsonObj.length; i++){
 
-        let card = document.cloneNode(origin)
+
         let bookName = jsonObj[i]['title'];
         console.log(bookName);
         let bookWriter = jsonObj[i]['author'];
@@ -57,26 +59,33 @@ function populateHeader(jsonObj){
         console.log(bookDetails);
         let bookImg = jsonObj[i]['image'];
         console.log(bookImg);
+        let bookIsbn = jsonObj[i]['isbn'].split(' ')[1];
+        console.log(bookIsbn);
 
         document.getElementById('bookName').innerHTML = removeTag(bookName);
         document.getElementById('author').innerHTML = "작가: "+removeTag(bookWriter)+"<br>상세정보: "+removeTag(bookDetails);
         //document.getElementsByClassName('mdl-card__title')[0].style.backgroundImage ="url("+bookImg+")";
-        document.getElementById('card-img').src = bookImg
+        document.getElementById('card-img').src = bookImg;
+        console.log(url+feedParams+bookIsbn);
+        let flink = url+feedParams+bookIsbn;
+        document.getElementById('feedLink').setAttribute('href',flink);
 
+
+        let card = header.cloneNode(true);
         nextHeader.append(card);
+
+        console.log(document.getElementById('feedButton'));
+
+
     }
 
+     header.style.display="none";
+
 }
 
-/*
-function mykeydown(){
-  if(event.keyCode == 13){
-   getBookInfo();
-   header.style.display ="block";
 
-  }
-}
-*/
+
+
 
 function myKeyFunc(){
    getBookInfo();
@@ -85,11 +94,20 @@ function myKeyFunc(){
    }else
         header.style.display="none";
 
+}
+function myRefresh(){
 
-
+    location.href = url+feedParams;
 }
 
 console.clear();
+
+function myFeedFunc(string){
+    console.log(string);
+   location.href = url+feedParams+string;
+
+
+}
 
 
 
