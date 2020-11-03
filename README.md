@@ -23,6 +23,7 @@
 
 ---
 ## 💾 기술 스택
+![Tech Stack](https://user-images.githubusercontent.com/49346677/98017836-2823a980-1e43-11eb-9e54-dba15f55283c.jpg)
 - Django
 - SQLite3
 - JQuery
