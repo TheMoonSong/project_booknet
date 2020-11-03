@@ -1,15 +1,9 @@
 # [책통행][domain]
 
-<div id="title_logo">
-<img src="https://user-images.githubusercontent.com/49346677/98012665-b3e60780-1e3c-11eb-96f2-19659766e3c8.jpg"></img>
+<div id="title_logo" style="text-align:center">
+<img src="https://user-images.githubusercontent.com/49346677/98012665-b3e60780-1e3c-11eb-96f2-19659766e3c8.jpg" width="70%"></img>
 </div>
 
-<style>
-#title_logo{
-    width: 70%;
-    margin: 0 auto;
-}
-</style>
 
 ## *책으로 통하는 행복*
 
