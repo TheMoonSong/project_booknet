@@ -20,6 +20,15 @@
 ---
 ## 🎨 주요 기능
 
+- 출판된 모든 책을 검색할 수 있습니다.
+![search](https://user-images.githubusercontent.com/49346677/98053863-f0395800-1e7c-11eb-8f32-0ffb14394d68.jpg)
+![result](https://user-images.githubusercontent.com/49346677/98053867-f16a8500-1e7c-11eb-8bb3-bb90b01ba841.jpg)
+
+- 검색 후 결과에서 검은색 책 버튼을 클릭하면, 오로지 그 책만을 위해 할당된 페이지가 나타납니다.
+![feed](https://user-images.githubusercontent.com/49346677/98053868-f16a8500-1e7c-11eb-9aa6-6a5ba1f84f6e.jpg)
+
+- 자유롭게 소통해봅니다 :)
+![create](https://user-images.githubusercontent.com/49346677/98053869-f2031b80-1e7c-11eb-963b-8132636a3594.jpg)
 
 ---
 ## 💾 기술 스택
