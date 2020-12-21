@@ -42,6 +42,7 @@
 - Naver OPEN API
 
 ---
+
 ## 🙋Developers
 - [Hojewl][HojewlProfile]   *Front-end Developer*
 - [TributeToTheMoon][TributeToTheMoonProfile]   *Back-end Developer*
