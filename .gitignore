@@ -2,3 +2,7 @@
 /static/
 /db/
 /media/
+
+.DS_Store
+
+.idea/
