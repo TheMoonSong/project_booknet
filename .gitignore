@@ -1,8 +1,10 @@
-*.pyc
-/static/
-/db/
-/media/
-
+# Mac OS
 .DS_Store
 
+# IntelliJ
 .idea/
+
+# Gradle
+.gradle/
+build/
+*.lock
