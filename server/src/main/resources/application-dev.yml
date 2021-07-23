@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:23306/booknet?characterEncoding=UTF-8&serverTimezone=UTC
+    username: admin
+    password: 1234
