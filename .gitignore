@@ -1,4 +1,16 @@
-*.pyc
-/static/
-/db/
-/media/
+# Mac OS
+.DS_Store
+
+# IntelliJ
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+# Gradle
+.gradle/
+build/
+*.lock
