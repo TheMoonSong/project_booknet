@@ -1,5 +1,6 @@
 package org.moonsong.booknet.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -7,6 +8,7 @@ import javax.persistence.*;
 
 @Getter
 @Entity
+@Builder
 @NoArgsConstructor
 public class User {
     @Id @GeneratedValue
