@@ -32,5 +32,4 @@ class UserControllerTest extends AcceptanceTest {
         Matcher matcher = locationPattern.matcher(userCreateResponse.header("location"));
         assertTrue(matcher.find());
     }
-
 }
