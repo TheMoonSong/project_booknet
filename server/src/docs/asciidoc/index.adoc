@@ -1,0 +1,15 @@
+= Booknet Application Programming Interface Document
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+:sectlinks:
+
+== 회원 관리
+
+=== 회원 가입
+==== Request
+include::{snippets}/member/create/http-request.adoc[]
+==== Response
+include::{snippets}/member/create/http-response.adoc[]

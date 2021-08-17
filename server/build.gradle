@@ -58,9 +58,12 @@ asciidoctor {
 	dependsOn test
 }
 
+task copyApiDocs(type: Copy) {
+	from file("build/asciidoc/html5/index.html")
+	into file("src/main/resources/static/docs")
+}
+
 bootJar {
 	dependsOn asciidoctor
-	from ("${asciidoctor.outputDir}/html5") {
-		into 'static/docs'
-	}
+	dependsOn copyApiDocs
 }
