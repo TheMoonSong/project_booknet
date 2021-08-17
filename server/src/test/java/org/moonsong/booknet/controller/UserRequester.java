@@ -25,7 +25,7 @@ public class UserRequester {
                         requestFields(
                                 fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
                                 fieldWithPath("password").type(JsonFieldType.STRING).description("비밀번호"),
-                                fieldWithPath("nickName").type(JsonFieldType.STRING).description("닉네임")
+                                fieldWithPath("nickname").type(JsonFieldType.STRING).description("닉네임")
                         )))
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(userCreateRequest)
