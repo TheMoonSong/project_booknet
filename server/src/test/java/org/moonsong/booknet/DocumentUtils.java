@@ -21,7 +21,9 @@ public class DocumentUtils {
     }
 
     public static OperationRequestPreprocessor getRequestPreprocessor() {
-        return preprocessRequest(prettyPrint());
+        return preprocessRequest(modifyUris()
+                .host("booknet-proxy-server.com")
+                .removePort(), prettyPrint());
     }
 
     public static OperationResponsePreprocessor getResponsePreprocessor() {
