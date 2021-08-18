@@ -10,11 +10,28 @@
 
 === 회원 가입
 ==== Request
-include::{snippets}/member/create/http-request.adoc[]
+include::{snippets}/user/create/http-request.adoc[]
 
 ===== 요청 인자
 ====== Body
-include::{snippets}/member/create/request-fields.adoc[]
+include::{snippets}/user/create/request-fields.adoc[]
 
 ==== Response
-include::{snippets}/member/create/http-response.adoc[]
+include::{snippets}/user/create/http-response.adoc[]
+
+
+=== 로그인
+
+==== Request
+include::{snippets}/user/login-booknet/http-request.adoc[]
+
+===== 요청 인자
+====== Body
+include::{snippets}/user/login-booknet/request-fields.adoc[]
+
+==== Response
+include::{snippets}/user/login-booknet/http-response.adoc[]
+
+===== 응답 인자
+====== Body
+include::{snippets}/user/login-booknet/response-fields.adoc[]
