@@ -1,5 +1,7 @@
 package org.moonsong.booknet.controller;
 
+import org.moonsong.booknet.dto.LoginRequest;
+import org.moonsong.booknet.dto.LoginResponse;
 import org.moonsong.booknet.dto.UserCreateRequest;
 import org.moonsong.booknet.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -23,5 +25,11 @@ public class UserController {
     ResponseEntity<Void> create(@RequestBody UserCreateRequest userCreateRequest) {
         Long userId = userService.createUser(userCreateRequest);
         return ResponseEntity.created(URI.create("/users/" + userId)).build();
+    }
+
+    @PostMapping("/booknet/login")
+    ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
+        LoginResponse loginResponse = userService.login(loginRequest);
+        return ResponseEntity.ok(loginResponse);
     }
 }
