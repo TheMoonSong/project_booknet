@@ -2,15 +2,20 @@ package org.moonsong.booknet.infrastructure;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.moonsong.booknet.Fixture.EMAIL;
 
+@SpringBootTest
+@ActiveProfiles("test")
 class JwtUtilsTest {
-    // todo 설정 파일에 의해 필요 값을 주입받아 빈으로 생성하고, Autowired하기
-    private JwtUtils jwtUtils = new JwtUtils();
+    @Autowired
+    private JwtUtils jwtUtils;
 
     @Test
     @DisplayName("토큰을 생성한다.")

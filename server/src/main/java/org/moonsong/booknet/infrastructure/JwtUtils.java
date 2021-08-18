@@ -1,20 +1,30 @@
 package org.moonsong.booknet.infrastructure;
 
 import io.jsonwebtoken.*;
+import org.moonsong.booknet.config.YamlPropertySourceFactory;
 import org.moonsong.booknet.exception.InvalidTokenException;
 import org.moonsong.booknet.exception.TokenExpiredException;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.Map;
 
+@Component
+@PropertySource(value = "classpath:/jwt.yml", factory = YamlPropertySourceFactory.class)
 public class JwtUtils {
     private final String secretKey;
     private final long validityInMilliseconds;
     private final JwtParser jwtParser;
 
-    public JwtUtils() {
-        this.secretKey = "Temporal Secret Key"; // todo 서브모듈을 통해 설정 파일을 감추고 사인키를 주입받기
-        this.validityInMilliseconds = 86400000; // todo 서브모듈을 통해 설정 파일을 감추고 유효 시간을 주입받기
+    public JwtUtils(
+            @Value("${jwt.secret-key}")
+            final String secretKey,
+            @Value("${jwt.expiration-milli-seconds}")
+            final long validityInMilliseconds) {
+        this.secretKey = secretKey; // todo 운영환경의 설정 값은 서브모듈로 감추기
+        this.validityInMilliseconds = validityInMilliseconds;
         this.jwtParser = Jwts.parser().setSigningKey(secretKey);
     }
 
