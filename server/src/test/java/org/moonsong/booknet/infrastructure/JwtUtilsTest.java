@@ -34,6 +34,7 @@ class JwtUtilsTest {
 
 
     @Test
+    @DisplayName("토큰을 검증한다.")
     void validateToken() {
         // given
         Map<String, Object> payload = JwtUtils.payloadBuilder()
