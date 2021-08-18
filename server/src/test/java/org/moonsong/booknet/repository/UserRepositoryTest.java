@@ -3,6 +3,7 @@ package org.moonsong.booknet.repository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.moonsong.booknet.domain.User;
+import org.moonsong.booknet.exception.NoSuchUserException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,5 +29,24 @@ class UserRepositoryTest extends RepositoryTest {
 
         // then
         assertThat(actual).isTrue();
+    }
+
+    @Test
+    @DisplayName("특정 Email을 가진 유저를 찾아온다.")
+    void findByEmail() {
+        // given
+        User user = User.builder()
+                .email(EMAIL)
+                .password(PASSWORD)
+                .nickname(NICKNAME)
+                .build();
+        User saveUser = userRepository.save(user);
+
+        // when
+        User findUser = userRepository.findByEmail(saveUser.getEmail())
+                .orElseThrow(NoSuchUserException::new);
+
+        // then
+        assertThat(findUser).isEqualTo(saveUser);
     }
 }
