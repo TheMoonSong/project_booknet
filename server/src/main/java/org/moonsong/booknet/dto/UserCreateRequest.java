@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 public class UserCreateRequest {
     private String email;
     private String password;
-    private String nickName;
+    private String nickname;
 
-    public UserCreateRequest(String email, String password, String nickName) {
+    public UserCreateRequest(String email, String password, String nickname) {
         this.email = email;
         this.password = password;
-        this.nickName = nickName;
+        this.nickname = nickname;
     }
 }

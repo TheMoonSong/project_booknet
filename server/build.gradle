@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.5.2'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id "org.asciidoctor.convert" version "1.5.9.2"
 }
 
 group = 'org.moonsong'
@@ -37,8 +38,32 @@ dependencies {
 	// Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	// Rest Docs
+	asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+	testCompile 'org.springframework.restdocs:spring-restdocs-restassured'
+}
+
+ext {
+	snippetsDir = file('build/generated-snippets')
 }
 
 test {
+	outputs.dir snippetsDir
 	useJUnitPlatform()
+}
+
+asciidoctor {
+	inputs.dir snippetsDir
+	dependsOn test
+}
+
+task copyApiDocs(type: Copy) {
+	from file("build/asciidoc/html5/index.html")
+	into file("src/main/resources/static/docs")
+}
+
+bootJar {
+	dependsOn asciidoctor
+	dependsOn copyApiDocs
 }

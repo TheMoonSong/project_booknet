@@ -5,12 +5,28 @@ import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.moonsong.booknet.dto.UserCreateRequest;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.payload.JsonFieldType;
+
+import static org.moonsong.booknet.DocumentUtils.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
 
 public class UserRequester {
     static ExtractableResponse<Response> createUserRequest(UserCreateRequest userCreateRequest) {
         return RestAssured
-                .given().log().all()
+                .given(getRequestSpecification()).log().all()
                 .accept("application/json")
+                .filter(document(
+                        "member/create",
+                        getRequestPreprocessor(),
+                        getResponsePreprocessor(),
+                        requestFields(
+                                fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
+                                fieldWithPath("password").type(JsonFieldType.STRING).description("비밀번호"),
+                                fieldWithPath("nickname").type(JsonFieldType.STRING).description("닉네임")
+                        )))
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(userCreateRequest)
                 .when().post("/api/users")

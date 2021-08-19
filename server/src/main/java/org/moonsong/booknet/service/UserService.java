@@ -23,7 +23,7 @@ public class UserService {
         User user = User.builder()
                 .email(userCreateRequest.getEmail())
                 .password(passwordEncoder.encode(userCreateRequest.getPassword()))
-                .nickname(userCreateRequest.getNickName())
+                .nickname(userCreateRequest.getNickname())
                 .build();
         User saveUser = userRepository.save(user);
         return saveUser.getId();
