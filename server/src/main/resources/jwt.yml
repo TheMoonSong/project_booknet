@@ -1,0 +1,3 @@
+jwt:
+  secret-key: secret-key-in-dev
+  expiration-milli-seconds: 86400000
